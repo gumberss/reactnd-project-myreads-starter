@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import Bookshelf from './Books/Bookshelf'
+import Bookshelf from './books/Bookshelf'
 
 var ListPage = props => {
 

@@ -16,15 +16,15 @@ export default class Book extends React.Component {
 
     render() {
         var { book } = this.props;
-
-        var authors = book.authors.reduce((allAuthors, author) => allAuthors + " & " + author);
+        
+        var authors = book.authors && book.authors.reduce((allAuthors, author) => allAuthors + " & " + author);
 
         return (
             <div className="book">
                 <div className="book-top">
                     <div
                         className="book-cover"
-                        style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}>
+                        style={{ backgroundImage: book.imageLinks && `url(${book.imageLinks.smallThumbnail})` }}>
                     </div>
                     <BookOptions onChangeShelf={this.onChangeShelf} />
                 </div>
