@@ -175,7 +175,7 @@ body, .app {
   font-size: 0.8em;
 }
 
-.error-message {
+.filter-message {
   text-align: center;
   padding-top: 65px;
   color:firebrick;

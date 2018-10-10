@@ -71,7 +71,7 @@ export default class SearchPage extends React.Component {
         </div>
         {
           searchData && (
-            <div className="error-message">
+            <div className="filter-message">
               <span>{message}</span>
             </div>
           )
