@@ -19,6 +19,13 @@ export default class SearchPage extends React.Component {
       searchData: event
     }));
 
+    if (!this.searchData) {
+      this.setState({
+        books: [],
+        message: ''
+      });
+    }
+
     BooksAPI.search(event)
       .then(books => {
 

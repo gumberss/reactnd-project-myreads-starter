@@ -5,7 +5,9 @@ import Book from './Book'
 
 var bookshelf = props => {
 
-    var { title, books, onChangeShelf } = props;
+    var { title, books, onChangeShelf, shelf } = props;
+
+    var shelfBooks = books.filter(book => book.shelf === shelf);
 
     return (
         <div className="bookshelf">
@@ -13,7 +15,7 @@ var bookshelf = props => {
             <div className="bookshelf-books">
                 <ol className="books-grid">
                     {
-                        books.map(book => (
+                        shelfBooks.map(book => (
                             <li key={book.id}>
                                 <Book book={book} onChangeShelf={onChangeShelf} />
                             </li>
@@ -27,6 +29,7 @@ var bookshelf = props => {
 
 bookshelf.protoTypes = {
     title: PropTypes.string.isRequired,
+    shelf: PropTypes.string.isRequired,
     books: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired
 };

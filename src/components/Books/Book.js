@@ -16,7 +16,7 @@ export default class Book extends React.Component {
 
     render() {
         var { book } = this.props;
-        
+
         var authors = book.authors && book.authors.reduce((allAuthors, author) => allAuthors + " & " + author);
 
         return (
@@ -26,7 +26,12 @@ export default class Book extends React.Component {
                         className="book-cover"
                         style={{ backgroundImage: book.imageLinks && `url(${book.imageLinks.smallThumbnail})` }}>
                     </div>
-                    <BookOptions onChangeShelf={this.onChangeShelf} />
+                    <BookOptions
+                        onChangeShelf={this.onChangeShelf}
+                        /** Os livros que são encontrados pelo campo de busca não possuem shelf, 
+                         * sendo assim, na tela de busca não selecionará corretamente a prateleira que o livro se encontra */
+                        currentShelf={book.shelf}
+                    />
                 </div>
                 <div className="book-title">{book.title}</div>
                 <div className="book-authors">{authors}</div>
