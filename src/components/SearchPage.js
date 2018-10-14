@@ -1,11 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import TextSerach from './external/TextSerach'
 import Book from './books/Book'
 import * as BooksAPI from '../BooksAPI'
+import FillShelfService from '../services/FillShelfService'
 
 export default class SearchPage extends React.Component {
+
+  static propTypes = {
+    booksInShelves: PropTypes.array.isRequired,
+    onChangeShelf: PropTypes.func.isRequired
+  }
 
   state = {
     searchData: '',
@@ -13,20 +20,21 @@ export default class SearchPage extends React.Component {
     books: []
   }
 
-  onChangeSearchData = event => {
+  onChangeSearchData = newSearchData => {
 
-    this.setState(() => ({
-      searchData: event
-    }));
+    this.setState({
+      searchData: newSearchData
+    });
 
-    if (!this.searchData) {
+    if (!newSearchData) {
       this.setState({
         books: [],
         message: ''
       });
+      return;
     }
 
-    BooksAPI.search(event)
+    BooksAPI.search(newSearchData)
       .then(books => {
 
         !books && this.setState({
@@ -39,10 +47,15 @@ export default class SearchPage extends React.Component {
           message: 'Não foi encontrado resultado para sua pesquisa'
         });
 
-        books && !books.error && this.setState({
-          books: books,
-          message: `Foram encontrados ${books.length} livro(s) pelo seu filtro`
-        });
+        if (books && !books.error) {
+
+          var booksWithShelf = FillShelfService(books, this.props.booksInShelves);
+
+          this.setState({
+            books: booksWithShelf,
+            message: `Foram encontrados ${books.length} livro(s) pelo seu filtro`
+          });
+        }
       });
   }
 
@@ -50,7 +63,6 @@ export default class SearchPage extends React.Component {
 
     var { searchData, message, books } = this.state;
     var { onChangeShelf } = this.props;
-
 
     return (
       <div className="search-books">
@@ -63,14 +75,7 @@ export default class SearchPage extends React.Component {
           </Link>
 
           <div className="search-books-input-wrapper">
-            {/*
-                    NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                    You can find these search terms here:
-                    https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-  
-                    However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                    you don't find a specific author or title. Every search is limited by search terms.
-                  */}
+            {/* https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md */}
             <TextSerach placeholder="Search by title or author"
               onChange={this.onChangeSearchData}
             />

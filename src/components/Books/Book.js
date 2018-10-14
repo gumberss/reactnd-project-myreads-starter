@@ -17,7 +17,9 @@ export default class Book extends React.Component {
     render() {
         var { book } = this.props;
 
-        var authors = book.authors && book.authors.reduce((allAuthors, author) => allAuthors + " & " + author);
+        var authors = book.authors
+            && book.authors.reduce((allAuthors, author) => allAuthors + " & " + author)
+            || 'Autor desconhecido';
 
         return (
             <div className="book">
