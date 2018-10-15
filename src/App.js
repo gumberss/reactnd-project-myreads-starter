@@ -6,6 +6,7 @@ import './App.css'
 import * as BooksAPI from './BooksAPI'
 import SearchPage from './components/SearchPage'
 import ListPage from './components/ListPage'
+import AddOrUpdateBookInArray from './services/AddOrUpdateBookInArray'
 
 class BooksApp extends React.Component {
   state = {
@@ -26,19 +27,16 @@ class BooksApp extends React.Component {
 
   onChangeShelf = (targetShelf, book) => {
 
-    BooksAPI.update(book, targetShelf)
-      .then(shelves => {
+    return BooksAPI.update(book, targetShelf)
+      .then(() => {
         this.setState(prevState => {
 
           book.shelf = targetShelf;
 
-          var indexOfBook = prevState.books.map(prevBook => prevBook.id).indexOf(book.id);
-
-          if (indexOfBook !== -1)
-            prevState.books.splice(indexOfBook, 1);
+          var newBooks = AddOrUpdateBookInArray(book, prevState.books);
 
           return {
-            books: [...prevState.books, book]
+            books: newBooks
           };
 
         });

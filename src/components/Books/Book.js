@@ -22,7 +22,7 @@ export default class Book extends React.Component {
             || 'Autor desconhecido';
 
         return (
-            <div className="book">
+            <div className={"book " + (book.selected ? "selected" : "")}>
                 <div className="book-top">
                     <div
                         className="book-cover"
@@ -30,8 +30,6 @@ export default class Book extends React.Component {
                     </div>
                     <BookOptions
                         onChangeShelf={this.onChangeShelf}
-                        /** Os livros que são encontrados pelo campo de busca não possuem shelf, 
-                         * sendo assim, na tela de busca não selecionará corretamente a prateleira que o livro se encontra */
                         currentShelf={book.shelf}
                     />
                 </div>

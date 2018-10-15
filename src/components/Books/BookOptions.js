@@ -5,7 +5,8 @@ export default class BookOptions extends React.Component {
 
     static propTypes = {
         onChangeShelf: PropTypes.func.isRequired,
-        currentShelf: PropTypes.string
+        currentShelf: PropTypes.string,
+        styleClass: PropTypes.string
     }
 
     state = {
@@ -18,19 +19,18 @@ export default class BookOptions extends React.Component {
     }
 
     onChangeShelf = event => {
-
         this.props.onChangeShelf(event.target.value);
     }
 
     render() {
 
         var { shelves } = this.state;
-        var { currentShelf } = this.props;
+        var { currentShelf, styleClass } = this.props;
         currentShelf = currentShelf || "";
         var shelvesKeys = Object.keys(shelves);
 
         return (
-            <div className="book-shelf-changer">
+            <div className={"book-shelf-changer " + styleClass} onClick={ event => event.stopPropagation()}>
                 <select onChange={this.onChangeShelf} value={currentShelf}>
                     <option disabled value="">Move to...</option>
                     {

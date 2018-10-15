@@ -121,7 +121,21 @@ body, .app {
 
 .book {
   width: 140px;
+  -moz-transition:transform 0.5s;
+  -webkit-transition:transform 0.5s;
+  -ms-transition:transform 0.5s;
+  -o-transition:transform 0.5s;
+  transition:transform 0.5s;
 }
+
+.book.selected{
+  -moz-transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
 .book-title,
 .book-authors {
   font-size: 0.8em;
@@ -169,6 +183,7 @@ body, .app {
   width: 128px;
   height: 192px;
 }
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
@@ -180,3 +195,19 @@ body, .app {
   padding-top: 65px;
   color:firebrick;
 }
+
+.select-message {
+  text-align: center;
+  padding-top: 15px;
+  color:green;
+  display: flex;
+  width: fit-content;
+  margin: auto;
+}
+
+.many-selected-options {
+  position: relative;
+  bottom: 10px;
+  margin-left: 10px;
+}
+
