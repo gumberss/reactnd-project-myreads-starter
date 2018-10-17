@@ -25,6 +25,11 @@ class BooksApp extends React.Component {
       });
   }
 
+
+  onChangeBooks = books => {
+    this.setState(books);
+  }
+
   onChangeShelf = (targetShelf, book) => {
 
     return BooksAPI.update(book, targetShelf)
@@ -63,6 +68,7 @@ class BooksApp extends React.Component {
             <ListPage
               books={books}
               onChangeShelf={this.onChangeShelf}
+              onChangeBooks={this.onChangeBooks}
             />
           )}
         />

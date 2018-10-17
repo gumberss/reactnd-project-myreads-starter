@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import TextSerach from './external/TextSerach'
-import Book from './books/Book'
-import BookOptions from './books/BookOptions'
+import Bookshelf from './books/Bookshelf'
+
+import SelectedBooksAction from './Others/SelectedBooksAction'
+
 import * as BooksAPI from '../BooksAPI'
+
 import FillShelfService from '../services/FillShelfService'
-import AddOrUpdateBookInArray from '../services/AddOrUpdateBookInArray'
 
 export default class SearchPage extends React.Component {
 
@@ -63,30 +65,9 @@ export default class SearchPage extends React.Component {
       });
   }
 
-  onSelectBook = book => {
-    return event => {
+  onChangeBooks = books => {
 
-      this.setState(prevState => {
-
-        var stateBook = prevState.books.find(stateBook => stateBook.id === book.id);
-
-        stateBook.selected = !stateBook.selected;
-
-        return prevState.books;
-      })
-    }
-  }
-
-  onChangeManyBooksShelf = targetShelf => {
-
-    var selectedBooks = this.state.books.filter(book => book.selected);
-
-    selectedBooks.forEach(book => {
-      book.selected = false;
-      this.props.onChangeShelf(targetShelf, book)
-      
-    });
-
+    this.setState(books);
   }
 
   render() {
@@ -120,30 +101,20 @@ export default class SearchPage extends React.Component {
             </div>
           )
         }
-        {
-          countSelectedBooks && (
-            <div className="select-message">
-              <span>
-                {`Você possui ${countSelectedBooks} livros selecionados`}
-              </span>
-              <BookOptions onChangeShelf={this.onChangeManyBooksShelf} styleClass="many-selected-options" />
 
-            </div>
-          ) || ''
-        }
+        <SelectedBooksAction
+          countSelectedBooks={countSelectedBooks}
+          onChangeShelf={onChangeShelf}
+          books={books}
+        />
 
         <div className="search-books-results">
           <ol className="books-grid">
-            {
-              books.map(book => (
-                <li key={book.id} onClick={this.onSelectBook(book)}>
-                  <Book
-                    book={book}
-                    onChangeShelf={onChangeShelf}
-                  />
-                </li>
-              ))
-            }
+            <Bookshelf
+              books={books}
+              onChangeShelf={onChangeShelf}
+              onChangeBooks={this.onChangeBooks}
+            />
           </ol>
         </div>
       </div>

@@ -9,13 +9,11 @@ export default class BookOptions extends React.Component {
         styleClass: PropTypes.string
     }
 
-    state = {
-        shelves: {
-            currentlyReading: 'Currently Reading',
-            wantToRead: 'Want to Read',
-            read: 'Read',
-            none: 'None'
-        }
+    shelves = {
+        currentlyReading: 'Currently Reading',
+        wantToRead: 'Want to Read',
+        read: 'Read',
+        none: 'None'
     }
 
     onChangeShelf = event => {
@@ -24,10 +22,9 @@ export default class BookOptions extends React.Component {
 
     render() {
 
-        var { shelves } = this.state;
         var { currentShelf, styleClass } = this.props;
         currentShelf = currentShelf || "";
-        var shelvesKeys = Object.keys(shelves);
+        var shelvesKeys = Object.keys(this.shelves);
 
         return (
             <div className={"book-shelf-changer " + styleClass} onClick={ event => event.stopPropagation()}>
@@ -39,7 +36,7 @@ export default class BookOptions extends React.Component {
                                 key={shelf}
                                 value={shelf}
                             >
-                                {shelves[shelf]}
+                                {this.shelves[shelf]}
                             </option>
                         ))
                     }

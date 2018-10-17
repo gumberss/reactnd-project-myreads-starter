@@ -3,35 +3,47 @@ import PropTypes from 'prop-types'
 
 import Book from './Book'
 
-var bookshelf = props => {
+export default class Bookshelf extends React.Component {
 
-    var { title, books, onChangeShelf, shelf } = props;
+    static protoTypes = {
+        title: PropTypes.string,
+        books: PropTypes.array.isRequired,
+        onChangeShelf: PropTypes.func.isRequired,
+        onChangeBooks: PropTypes.func.isRequired
+    };
 
-    var shelfBooks = books.filter(book => book.shelf === shelf);
+    onChangeBook = book => {
+        return event => {
 
-    return (
-        <div className="bookshelf">
-            <h2 className="bookshelf-title">{title}</h2>
-            <div className="bookshelf-books">
-                <ol className="books-grid">
-                    {
-                        shelfBooks.map(book => (
-                            <li key={book.id}>
-                                <Book book={book} onChangeShelf={onChangeShelf} />
-                            </li>
-                        ))
-                    }
-                </ol>
+            var changedBooks = this.props.books;
+
+            var stateBook = changedBooks.find(stateBook => stateBook.id === book.id);
+
+            stateBook.selected = !stateBook.selected;
+
+            this.props.onChangeBooks(changedBooks);
+        }
+    }
+
+    render() {
+
+        var { title, books, onChangeShelf } = this.props;
+
+        return (
+            <div className="bookshelf">
+                <h2 className="bookshelf-title">{title}</h2>
+                <div className="bookshelf-books">
+                    <ol className="books-grid">
+                        {
+                            books.map(book => (
+                                <li key={book.id} onClick={this.onChangeBook(book)}>
+                                    <Book book={book} onChangeShelf={onChangeShelf} />
+                                </li>
+                            ))
+                        }
+                    </ol>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
-
-bookshelf.protoTypes = {
-    title: PropTypes.string.isRequired,
-    shelf: PropTypes.string.isRequired,
-    books: PropTypes.array.isRequired,
-    onChangeShelf: PropTypes.func.isRequired
-};
-
-export default bookshelf;
