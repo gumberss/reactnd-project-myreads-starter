@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 
 import TextSerach from './external/TextSerach'
 import Bookshelf from './books/Bookshelf'
-
-import SelectedBooksAction from './Others/SelectedBooksAction'
+import SelectedBooksAction from './others/SelectedBooksAction'
 
 import * as BooksAPI from '../BooksAPI'
 

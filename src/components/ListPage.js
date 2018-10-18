@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import Bookshelf from './books/Bookshelf'
-import SelectedBooksAction from './Others/SelectedBooksAction'
+import SelectedBooksAction from './others/SelectedBooksAction'
 
 var ListPage = props => {
 
