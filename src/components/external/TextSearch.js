@@ -21,9 +21,11 @@ export default class TextSearch extends Component {
     handleChange = event => {
         clearTimeout(this.timer);
 
-        var value = event.target.value;
+        const { value } = event.target;
 
-        this.setState({ value: value });
+        this.setState({
+            value:value
+        });
 
         this.timer = setTimeout(this.triggerChange, WAIT_INTERVAL);
     }

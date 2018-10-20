@@ -6,11 +6,14 @@ import SelectedBooksAction from './others/SelectedBooksAction'
 
 var ListPage = props => {
 
-    var { books, onChangeShelf, onChangeBooks } = props;
+    const { books, onChangeShelf, onChangeBooks } = props;
 
-    var currentlyReading = books.filter(book => book.shelf === 'currentlyReading');
-    var wantToRead = books.filter(book => book.shelf === 'wantToRead');
-    var read = books.filter(book => book.shelf === 'read');
+    const filter = books => shelf => books.filter(book => book.shelf === shelf);
+    const filterBy = filter(books);
+
+    const currentlyReading = filterBy('currentlyReading');
+    const wantToRead = filterBy('wantToRead');
+    const read = filterBy('read');
 
     var countSelectedBooks = books.filter(book => book.selected).length;
 

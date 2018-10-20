@@ -6,25 +6,16 @@ import './App.css'
 import * as BooksAPI from './BooksAPI'
 import SearchPage from './components/SearchPage'
 import ListPage from './components/ListPage'
-import AddOrUpdateBookInArray from './services/AddOrUpdateBookInArray'
 
 class BooksApp extends React.Component {
   state = {
     books: []
   }
 
-  componentDidMount() {
-
-    BooksAPI.getAll()
-      .then(books => {
-
-        this.setState(prevState => ({
-          books: books
-        }));
-
-      });
+  async componentDidMount() {
+    const books = await BooksAPI.getAll();
+    this.setState(books);
   }
-
 
   onChangeBooks = books => {
     this.setState(books);
@@ -34,17 +25,11 @@ class BooksApp extends React.Component {
 
     return BooksAPI.update(book, targetShelf)
       .then(() => {
-        this.setState(prevState => {
-
-          book.shelf = targetShelf;
-
-          var newBooks = AddOrUpdateBookInArray(book, prevState.books);
-
-          return {
-            books: newBooks
-          };
-
-        });
+        book.shelf = targetShelf;
+        
+        this.setState(prevState => ({
+            books: prevState.books.filter(b => b.id !== book.id).concat([book])
+        }));
       });
   }
 

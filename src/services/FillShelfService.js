@@ -1,4 +1,4 @@
-var fillShelfService = function (booksWithoutShelf, booksWithShelf) {
+var FillShelfService = function (booksWithoutShelf, booksWithShelf) {
 
     if (!booksWithShelf) booksWithShelf = [];
 
@@ -12,4 +12,4 @@ var fillShelfService = function (booksWithoutShelf, booksWithShelf) {
     });
 }
 
-export default fillShelfService;
+export default FillShelfService;

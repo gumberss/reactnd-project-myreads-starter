@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import TextSerach from './external/TextSerach'
+import TextSerach from './external/TextSearch'
 import Bookshelf from './books/Bookshelf'
 import SelectedBooksAction from './others/SelectedBooksAction'
 
