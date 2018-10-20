@@ -71,10 +71,10 @@ export default class SearchPage extends React.Component {
 
   render() {
 
-    var { searchData, message, books } = this.state;
-    var { onChangeShelf } = this.props;
+    let { searchData, message, books } = this.state;
+    const { onChangeShelf } = this.props;
 
-    var countSelectedBooks = books.filter(book => book.selected).length;
+    const countSelectedBooks = books.filter(book => book.selected).length;
 
     return (
       <div className="search-books">

@@ -12,9 +12,9 @@ export default class SelectedBooksAction extends React.Component {
 
     onChangeManyBooksShelf = targetShelf => {
 
-        var { books, onChangeShelf } = this.props;
+        let { books, onChangeShelf } = this.props;
 
-        var selectedBooks = books.filter(book => book.selected);
+        let selectedBooks = books.filter(book => book.selected);
 
         selectedBooks.forEach(book => {
             book.selected = false;
@@ -23,7 +23,7 @@ export default class SelectedBooksAction extends React.Component {
     }
 
     render() {
-        var { countSelectedBooks } = this.props;
+        const { countSelectedBooks } = this.props;
 
         return (
             (countSelectedBooks && (

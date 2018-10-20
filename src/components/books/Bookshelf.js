@@ -15,9 +15,9 @@ export default class Bookshelf extends React.Component {
     onChangeBook = book => {
         return event => {
 
-            var changedBooks = this.props.books;
+            let changedBooks = this.props.books;
 
-            var stateBook = changedBooks.find(stateBook => stateBook.id === book.id);
+            let stateBook = changedBooks.find(stateBook => stateBook.id === book.id);
 
             stateBook.selected = !stateBook.selected;
 
@@ -27,7 +27,7 @@ export default class Bookshelf extends React.Component {
 
     render() {
 
-        var { title, books, onChangeShelf } = this.props;
+        let { title, books, onChangeShelf } = this.props;
 
         return (
             <div className="bookshelf">

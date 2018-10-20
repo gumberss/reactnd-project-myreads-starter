@@ -22,9 +22,9 @@ export default class BookOptions extends React.Component {
 
     render() {
 
-        var { currentShelf, styleClass } = this.props;
+        let { currentShelf, styleClass } = this.props;
         currentShelf = currentShelf || "";
-        var shelvesKeys = Object.keys(this.shelves);
+        const shelvesKeys = Object.keys(this.shelves);
 
         return (
             <div className={"book-shelf-changer " + styleClass} onClick={ event => event.stopPropagation()}>

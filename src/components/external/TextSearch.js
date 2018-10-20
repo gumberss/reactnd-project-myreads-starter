@@ -24,7 +24,7 @@ export default class TextSearch extends Component {
         const { value } = event.target;
 
         this.setState({
-            value:value
+            value: value
         });
 
         this.timer = setTimeout(this.triggerChange, WAIT_INTERVAL);
